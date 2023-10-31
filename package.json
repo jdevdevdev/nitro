@@ -1,5 +1,6 @@
 {
   "name": "nitropack",
+  "private": true,
   "version": "2.7.1",
   "description": "Build and Deploy Universal JavaScript Servers",
   "repository": "unjs/nitro",
@@ -59,6 +60,7 @@
     "undici": "^5.26.3"
   },
   "dependencies": {
+    "@jdevdevdev/aws-lambda-edge-preset": "workspace:*",
     "@cloudflare/kv-asset-handler": "^0.3.0",
     "@netlify/functions": "^2.3.0",
     "@rollup/plugin-alias": "^5.0.1",
