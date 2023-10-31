@@ -236,7 +236,7 @@ export function testNitro(
   });
 
   // aws lambda requires buffer responses to be base 64
-  const LambdaPresets = new Set(["netlify", "aws-lambda"]);
+  const LambdaPresets = new Set(["netlify", "aws-lambda", "@jdevdevdev/aws-lambda-edge-preset"]);
   it.runIf(LambdaPresets.has(ctx.preset))(
     "buffer image responses",
     async () => {
@@ -555,6 +555,12 @@ export function testNitro(
       if (ctx.preset === "vercel-edge") {
         expectedCookies =
           "foo=bar, bar=baz, test=value; Path=/, test2=value; Path=/";
+      }
+
+      // aws-lambda-edge returns a string cookie and has different spacing
+      if(ctx.preset === "@jdevdevdev/aws-lambda-edge-preset") {
+        expectedCookies =
+          "foo=bar, bar=baz,test=value; Path=/,test2=value; Path=/";
       }
 
       expect(headers["set-cookie"]).toMatchObject(expectedCookies);
